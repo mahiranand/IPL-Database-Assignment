@@ -5,7 +5,7 @@ const strikeRateOfBatsman = (databaseName, connection) => {
                     JOIN Matches 
                         ON match_id = Id
                         WHERE batsman = "DA Warner"
-                        GROUP BY matches.season,batsman;`;
+                        GROUP BY Matches.season,batsman;`;
     return connection.query(query);
   });
 };
