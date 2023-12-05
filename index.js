@@ -8,6 +8,7 @@ const { matchesPerYear } = require("./src/server/matchesPerYear");
 const { matchesPerTeamPerYear } = require("./src/server/matchesPerTeamPerYear");
 const { extraRunsConceded } = require("./src/server/extraRunsConceded");
 const { topTenBowler2015 } = require("./src/server/topTenBowler2015");
+const { tossAndMatchWin } = require("./src/server/tossAndMatchWin");
 
 var connection = mysql.createPool({
   host: "localhost",
@@ -29,6 +30,7 @@ createDataBase(databaseName, connection)
     // return matchesPerTeamPerYear(databaseName,connection);
     // return extraRunsConceded(databaseName,connection);
     // return topTenBowler2015(databaseName,connection);
+    // return tossAndMatchWin(databaseName,connection);
   })
   .then((data) => {
     console.log(data);
