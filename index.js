@@ -12,6 +12,7 @@ const { tossAndMatchWin } = require("./src/server/tossAndMatchWin");
 const { playerOfEverySeason } = require("./src/server/playerOfEverySeason");
 const { strikeRateOfBatsman } = require("./src/server/strikeRateOfBatsman");
 const { highestDismissal } = require("./src/server/highestDismissal");
+const { bestSuperOverBowler } = require("./src/server/bestSuperOverBowler");
 
 var connection = mysql.createPool({
   host: "localhost",
@@ -37,6 +38,7 @@ createDataBase(databaseName, connection)
     // return playerOfEverySeason(databaseName, connection);
     // return strikeRateOfBatsman(databaseName,connection);
     // return highestDismissal(databaseName,connection);
+    return bestSuperOverBowler(databaseName,connection);
   })
   .then((data) => {
     console.log(data);
