@@ -4,6 +4,7 @@ const mysql = require("mysql2/promise");
 const {createDataBase} = require("./src/public/databaseFunctions/createDataBase");
 const {insertDataOfMatches} = require("./src/public/databaseFunctions/insertDataOfMatches");
 const {insertDataOfDeliveries} = require("./src/public/databaseFunctions/insertDataOfDeliveries");
+const { matchesPerYear } = require("./src/server/matchesPerYear");
 
 var connection = mysql.createPool({
   host: "localhost",
@@ -19,6 +20,12 @@ createDataBase(databaseName, connection)
       insertDataOfMatches(databaseName, connection, matches),
       insertDataOfDeliveries(databaseName, connection, deliveries),
     ]);
+  })
+  .then(() => {
+    // return matchesPerYear(databaseName, connection);
+  })
+  .then((data) => {
+    console.log(data);
   })
   .catch((err) => {
     console.log(err);
