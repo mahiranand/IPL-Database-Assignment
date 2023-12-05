@@ -16,7 +16,7 @@ const { bestSuperOverBowler } = require("./src/server/bestSuperOverBowler");
 
 var connection = mysql.createPool({
   host: "localhost",
-  user: "root", 
+  user: "root",
   password: "Deepa@07", //use your own password
 });
 
@@ -30,18 +30,24 @@ createDataBase(databaseName, connection)
     ]);
   })
   .then(() => {
-    // return matchesPerYear(databaseName, connection);
-    // return matchesPerTeamPerYear(databaseName,connection);
-    // return extraRunsConceded(databaseName,connection);
-    // return topTenBowler2015(databaseName,connection);
-    // return tossAndMatchWin(databaseName,connection);
-    // return playerOfEverySeason(databaseName, connection);
-    // return strikeRateOfBatsman(databaseName,connection);
-    // return highestDismissal(databaseName,connection);
-    return bestSuperOverBowler(databaseName,connection);
+    return Promise.all([
+      matchesPerYear(databaseName, connection),
+      matchesPerTeamPerYear(databaseName, connection),
+      extraRunsConceded(databaseName, connection),
+      topTenBowler2015(databaseName, connection),
+      tossAndMatchWin(databaseName, connection),
+      playerOfEverySeason(databaseName, connection),
+      strikeRateOfBatsman(databaseName,connection),
+      highestDismissal(databaseName,connection),
+      bestSuperOverBowler(databaseName, connection)
+    ]);
   })
   .then((data) => {
-    console.log(data);
+    data.forEach((element,idx) => {
+      console.log(`ANSWER OF QUES ${idx+1}`)
+      console.log(element);
+      console.log('\n')
+    });
   })
   .catch((err) => {
     console.log(err);
