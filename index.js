@@ -7,6 +7,7 @@ const {insertDataOfDeliveries} = require("./src/public/databaseFunctions/insertD
 const { matchesPerYear } = require("./src/server/matchesPerYear");
 const { matchesPerTeamPerYear } = require("./src/server/matchesPerTeamPerYear");
 const { extraRunsConceded } = require("./src/server/extraRunsConceded");
+const { topTenBowler2015 } = require("./src/server/topTenBowler2015");
 
 var connection = mysql.createPool({
   host: "localhost",
@@ -27,6 +28,7 @@ createDataBase(databaseName, connection)
     // return matchesPerYear(databaseName, connection);
     // return matchesPerTeamPerYear(databaseName,connection);
     // return extraRunsConceded(databaseName,connection);
+    // return topTenBowler2015(databaseName,connection);
   })
   .then((data) => {
     console.log(data);
