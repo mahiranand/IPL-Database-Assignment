@@ -5,8 +5,6 @@ const {createDataBase} = require("./src/public/databaseFunctions/createDataBase"
 const {insertDataOfMatches} = require("./src/public/databaseFunctions/insertDataOfMatches");
 const {insertDataOfDeliveries} = require("./src/public/databaseFunctions/insertDataOfDeliveries");
 
-
-
 var connection = mysql.createPool({
   host: "localhost",
   user: "root", 
@@ -17,10 +15,10 @@ const databaseName = "Cricket"; // give a new name if this database exists
 
 createDataBase(databaseName, connection)
   .then(() => {
-    return insertDataOfMatches(databaseName, connection, matches);
-  })
-  .then(() => {
-    return insertDataOfDeliveries(databaseName, connection, deliveries);
+    return Promise.all([
+      insertDataOfMatches(databaseName, connection, matches),
+      insertDataOfDeliveries(databaseName, connection, deliveries),
+    ]);
   })
   .catch((err) => {
     console.log(err);
